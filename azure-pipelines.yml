@@ -1,0 +1,31 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool: goyal-agent
+
+variables:
+  WorkD: '$(System.DefaultWorkingDirectory)\Environment'
+
+steps:
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: 'latest'
+
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(workD)'
+      backendServiceArm: 'goyal-app'
+      backendAzureRmStorageAccountName: 'storegoyal1121'
+      backendAzureRmContainerName: 'cont1'
+      backendAzureRmKey: 'test.terraform.tfstate'
+
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: '$(workD)'
+      environmentServiceNameAzureRM: 'goyal-app'
