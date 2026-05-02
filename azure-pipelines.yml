@@ -10,10 +10,12 @@ variables:
 
 steps:
   - task: TerraformInstaller@1
+    displayName: terraform install
     inputs:
       terraformVersion: 'latest'
 
   - task: TerraformTask@5
+    displayName: terraform init
     inputs:
       provider: 'azurerm'
       command: 'init'
@@ -24,6 +26,7 @@ steps:
       backendAzureRmKey: 'test.terraform.tfstate'
 
   - task: TerraformTask@5
+    displayName: terraform plan
     inputs:
       provider: 'azurerm'
       command: 'plan'
@@ -31,6 +34,7 @@ steps:
       environmentServiceNameAzureRM: 'goyal-app'
 
   - task: TerraformTask@5
+    displayName: terraform apply
     inputs:
       provider: 'azurerm'
       command: 'apply'
@@ -39,6 +43,7 @@ steps:
       environmentServiceNameAzureRM: 'goyal-app'
 
   - task: TerraformTask@5
+    displayName: terraform destroy
     inputs:
       provider: 'azurerm'
       command: 'destroy'
