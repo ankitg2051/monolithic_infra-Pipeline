@@ -6,7 +6,7 @@ trigger:
 pool: goyal-agent
 
 variables:
-  WorkD: '$(System.DefaultWorkingDirectory)/Environment'
+  WorkD: '$(System.DefaultWorkingDirectory)\Environment'
 
 steps:
   - task: TerraformInstaller@1
